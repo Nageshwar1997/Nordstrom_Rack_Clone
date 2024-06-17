@@ -40,6 +40,10 @@ module.exports = {
 
 `npm install @reduxjs/toolkit`
 
+### Install React Redux
+
+`npm i redux`
+
 ### Install MomentJS
 
 `npm install moment --save`
