@@ -42,7 +42,7 @@ module.exports = {
 
 ### Install React Redux
 
-`npm i redux`
+`npm i react-redux`
 
 ### Install MomentJS
 
