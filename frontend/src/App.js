@@ -76,7 +76,7 @@ function App() {
           fetchAddToCartCount, // for cart product count fetch api
         }}
       >
-        <ToastContainer position="top-center" autoClose={2000} limit={1} />
+        <ToastContainer position="top-center" autoClose={2000} limit={2} />
         <Header />
         <main className="min-h-[calc(100vh-120px)] pt-16">
           <Outlet />
