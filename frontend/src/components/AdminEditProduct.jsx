@@ -9,6 +9,7 @@ import SummaryApi from "../common";
 import { toast } from "react-toastify";
 
 const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
+  // State to manage product data and images
   const [product, setProduct] = useState({
     ...productData,
     productName: productData?.productName || "",
@@ -20,66 +21,68 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
     sellingPrice: productData?.sellingPrice || "",
   });
 
+  // State for full-screen image display
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState("");
 
+  // Handle input change for form fields
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
-    setProduct((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+    setProduct((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
+  // Handle image upload
   const handleUploadProduct = async (e) => {
     const file = e.target.files[0];
     const uploadImageCloudinary = await uploadImage(file);
 
-    setProduct((prev) => {
-      return {
-        ...prev,
-        productImages: [...prev.productImages, uploadImageCloudinary.url],
-      };
-    });
+    setProduct((prev) => ({
+      ...prev,
+      productImages: [...prev.productImages, uploadImageCloudinary.url],
+    }));
   };
+
+  // Handle deletion of product image
   const handleDeleteProductImage = async (index) => {
     const newProductImages = [...product.productImages];
     newProductImages.splice(index, 1);
 
-    setProduct((prev) => {
-      return {
-        ...prev,
-        productImages: newProductImages,
-      };
-    });
+    setProduct((prev) => ({
+      ...prev,
+      productImages: newProductImages,
+    }));
   };
 
-  // UPLOAD PRODUCT
+  // Handle form submission to update product
   const handleUploadProductSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Product", product);
 
-    const fetchResponse = await fetch(SummaryApi.updateProduct.url, {
-      method: SummaryApi.updateProduct.method,
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(product),
-    });
+    try {
+      const fetchResponse = await fetch(SummaryApi.updateProduct.url, {
+        method: SummaryApi.updateProduct.method,
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      });
 
-    const responseData = await fetchResponse.json();
+      const responseData = await fetchResponse.json();
 
-    if (responseData.success) {
-      toast.success(responseData?.message);
-      onClose();
-      fetchAllProducts();
-    }
-    if (responseData.error) {
-      toast.error(responseData?.message);
+      if (responseData.success) {
+        toast.success(responseData?.message);
+        onClose(); // Close the edit product modal
+        fetchAllProducts(); // Fetch all products to update the list
+      } else {
+        toast.error(responseData?.message);
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+      toast.error("Failed to update product. Please try again.");
     }
   };
 
@@ -100,6 +103,7 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
             className="grid gap-2 p-4 pb-5 overflow-y-scroll h-full"
             onSubmit={handleUploadProductSubmit}
           >
+            {/* Product Name */}
             <label htmlFor="productName" className="cursor-pointer w-fit">
               Product Name :
             </label>
@@ -114,6 +118,8 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
               title="Please Fill Product Name Field"
               required
             />
+
+            {/* Brand Name */}
             <label htmlFor="brandName" className="cursor-pointer w-fit mt-3">
               Brand Name :
             </label>
@@ -128,6 +134,8 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
               title="Please Fill Product Brand Field"
               required
             />
+
+            {/* Category */}
             <label htmlFor="category" className="cursor-pointer w-fit mt-3">
               Category Name :
             </label>
@@ -141,21 +149,16 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
               title={product?.category ? "" : "Please Select Category"}
             >
               <option value="">Select Category</option>
-              {productCategory.map((prod, ind) => {
-                return (
-                  <option value={prod.value} key={prod.value + ind}>
-                    {prod.label}
-                  </option>
-                );
-              })}
+              {productCategory.map((prod, ind) => (
+                <option value={prod.value} key={prod.value + ind}>
+                  {prod.label}
+                </option>
+              ))}
             </select>
-            <label
-              htmlFor="productImages"
-              className="cursor-pointer w-fit mt-3"
-            >
+
+            {/* Product Images */}
+            <label htmlFor="uploadImageInput" className="cursor-pointer mt-3">
               Product Images :
-            </label>
-            <label htmlFor="uploadImageInput" className="cursor-pointer">
               <div className="p-2 bg-blue-50 border rounded-md h-32 w-full flex justify-center items-center">
                 <div className="text-slate-500 flex flex-col gap-2 justify-center items-center">
                   <span className="text-4xl">
@@ -171,39 +174,43 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
                 </div>
               </div>
             </label>
+
+            {/* Display Uploaded Images */}
             <div>
               {product?.productImages[0] ? (
-                <div className="flex items-center gap-2">
-                  {product.productImages.map((img, ind) => {
-                    return (
-                      <div key={img + ind} className="relative group">
-                        <img
-                          src={img}
-                          alt={img}
-                          width={80}
-                          height={80}
-                          className="bg-blue-50 border rounded cursor-pointer"
-                          onClick={() => {
-                            setOpenFullScreenImage(true);
-                            setFullScreenImage(img);
-                          }}
-                        />
-                        <div
-                          className="absolute bottom-0 right-0 p-0.5 bg-white text-red-700 rounded-full cursor-pointer hidden group-hover:block"
-                          onClick={() => {
-                            handleDeleteProductImage(ind);
-                          }}
-                        >
-                          <MdDelete />
-                        </div>
+                <div className="flex items-center gap-2 mt-3">
+                  {product.productImages.map((img, ind) => (
+                    <div key={img + ind} className="relative group">
+                      <img
+                        src={img}
+                        alt={img}
+                        width={80}
+                        height={80}
+                        className="bg-blue-50 border rounded cursor-pointer"
+                        onClick={() => {
+                          setOpenFullScreenImage(true);
+                          setFullScreenImage(img);
+                        }}
+                      />
+                      <div
+                        className="absolute bottom-0 right-0 p-0.5 bg-white text-red-700 rounded-full cursor-pointer hidden group-hover:block"
+                        onClick={() => {
+                          handleDeleteProductImage(ind);
+                        }}
+                      >
+                        <MdDelete />
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               ) : (
-                <p className="text-red-600 text-xs">*Please upload image</p>
+                <p className="text-red-600 text-xs mt-2">
+                  *Please upload image
+                </p>
               )}
             </div>
+
+            {/* Original Price */}
             <label
               htmlFor="originalPrice"
               className="cursor-pointer w-fit mt-3"
@@ -221,10 +228,11 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
               title="Please Fill Original Price Field"
               required
             />
+
+            {/* Selling Price */}
             <label htmlFor="sellingPrice" className="cursor-pointer w-fit mt-3">
               Selling Price :
             </label>
-
             <input
               type="number"
               id="sellingPrice"
@@ -236,6 +244,8 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
               title="Please Fill Selling Price Field"
               required
             />
+
+            {/* Product Description */}
             <label htmlFor="description" className="cursor-pointer w-fit mt-3">
               Product Description :
             </label>
@@ -249,19 +259,21 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
               value={product.description}
               onChange={handleOnChange}
             ></textarea>
+
+            {/* Submit Button */}
             <button className="px-3 py-1 mt-2 bg-blue-600 text-white rounded mb-10 hover:bg-blue-700">
               Update Product
             </button>
           </form>
         </div>
-        {/* **** Display Image Full Screen */}
+
+        {/* Full-screen Image Display */}
         {openFullScreenImage && (
           <DisplayImage
             onClose={() => setOpenFullScreenImage(false)}
             imgUrl={fullScreenImage}
           />
         )}
-        {/* **** Display Image Full Screen */}
       </div>
     </div>
   );
