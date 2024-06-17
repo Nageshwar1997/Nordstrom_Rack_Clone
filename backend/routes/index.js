@@ -2,34 +2,34 @@ const express = require("express");
 const router = express.Router();
 
 // User Controllers
-const userSignUpController = require("../controller/user/userSignUp");
-const userSignInController = require("../controller/user/userSignIn");
-const userDetailsController = require("../controller/user/userDetails");
-const userLogoutController = require("../controller/user/userLogout");
-const allUsersController = require("../controller/user/allUsers");
-const updateUserController = require("../controller/user/updateUser");
-const addToCartController = require("../controller/user/addToCart");
-const countAddToCartController = require("../controller/user/countAddToCart");
-const addToCartViewController = require("../controller/user/addToCartView");
+const userSignUpController = require("../controllers/user/userSignUp");
+const userSignInController = require("../controllers/user/userSignIn");
+const userDetailsController = require("../controllers/user/userDetails");
+const userLogoutController = require("../controllers/user/userLogout");
+const allUsersController = require("../controllers/user/allUsers");
+const updateUserController = require("../controllers/user/updateUser");
+const addToCartController = require("../controllers/user/addToCart");
+const countAddToCartController = require("../controllers/user/countAddToCart");
+const addToCartViewController = require("../controllers/user/addToCartView");
 
 // // Product Controllers
-const uploadProductController = require("../controller/product/uploadProduct");
-const getProductController = require("../controller/product/getProduct");
-const updateProductController = require("../controller/product/updateProduct");
-const getCategoryProductController = require("../controller/product/getCategoryProductOne");
-const getCategoryWiseProductController = require("../controller/product/getCategoryWiseProduct");
-const getProductDetailsController = require("../controller/product/getProductDetails");
+const uploadProductController = require("../controllers/product/uploadProduct");
+const getProductController = require("../controllers/product/getProduct");
+const updateProductController = require("../controllers/product/updateProduct");
+const getCategoryProductController = require("../controllers/product/getCategoryProductOne");
+const getCategoryWiseProductController = require("../controllers/product/getCategoryWiseProduct");
+const getProductDetailsController = require("../controllers/product/getProductDetails");
 
 // Middleware
 const authToken = require("../middleware/authToken");
-const updateAddToCartCountController = require("../controller/user/updateCountAddToCart");
-const deleteProductFromCartController = require("../controller/user/deleteFromCart");
-const searchProductController = require("../controller/product/searchProduct");
-const filterProductController = require("../controller/product/filterProduct");
-const paymentController = require("../controller/order/paymentController");
-const webHookController = require("../controller/order/webhook");
-const orderController = require("../controller/order/order.controller");
-const allOrdersController = require("../controller/order/allOrders.controller");
+const updateAddToCartCountController = require("../controllers/user/updateCountAddToCart");
+const deleteProductFromCartController = require("../controllers/user/deleteFromCart");
+const searchProductController = require("../controllers/product/searchProduct");
+const filterProductController = require("../controllers/product/filterProduct");
+const paymentController = require("../controllers/order/paymentController");
+const webHookController = require("../controllers/order/webhook");
+const orderController = require("../controllers/order/order.controller");
+const allOrdersController = require("../controllers/order/allOrders.controller");
 
 // User Routes
 router.post("/signup", userSignUpController);
