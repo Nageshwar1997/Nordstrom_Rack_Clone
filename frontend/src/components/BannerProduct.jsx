@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import desktopBannerImage1 from "../assets/banner/desktop/img1.webp";
-import desktopBannerImage2 from "../assets/banner/desktop/img2.webp";
+import desktopBannerImage2 from "../assets/banner/desktop/img2.jpg";
 import desktopBannerImage3 from "../assets/banner/desktop/img3.jpg";
 import desktopBannerImage4 from "../assets/banner/desktop/img4.jpg";
 import desktopBannerImage5 from "../assets/banner/desktop/img5.webp";
 
-import mobileBannerImage1 from "../assets/banner/mobile/img1_mobile.jpg";
-import mobileBannerImage2 from "../assets/banner/mobile/img2_mobile.webp";
-import mobileBannerImage3 from "../assets/banner/mobile/img3_mobile.jpg";
-import mobileBannerImage4 from "../assets/banner/mobile/img4_mobile.jpg";
-import mobileBannerImage5 from "../assets/banner/mobile/img5_mobile.png";
+import mobileBannerImage1 from "../assets/banner/mobile/img1.jpg";
+import mobileBannerImage2 from "../assets/banner/mobile/img2.gif";
+import mobileBannerImage3 from "../assets/banner/mobile/img3.jpg";
+import mobileBannerImage4 from "../assets/banner/mobile/img4.jpg";
+import mobileBannerImage5 from "../assets/banner/mobile/img5.png";
 
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
