@@ -3,20 +3,14 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors: {
-        // Define your light blue shades
-        "light-blue": {
-          50: "#f0f9ff",
-          100: "#e0f2fe",
-          200: "#bae6fd",
-          300: "#7dd3fc",
-          400: "#38bdf8",
-          500: "#0ea5e9",
-          600: "#0284c7",
-          700: "#0369a1",
-          800: "#075985",
-          900: "#0c4a6e",
-        },
+      screens: {
+        base: "360px", // Base device
+        xs: "480px", // Extra small devices (portrait phones)
+        sm: "640px", // Small devices (landscape phones)
+        md: "768px", // Medium devices (tablets)
+        lg: "1024px", // Large devices (desktops)
+        xl: "1280px", // Extra large devices (large desktops)
+        "2xl": "1536px", // 2X large devices (larger desktops)
       },
     },
   },
