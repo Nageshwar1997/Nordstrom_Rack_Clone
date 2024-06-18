@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../assets/logo.png";
 
-const Logo = ({ w, h }) => {
-  return <img src={logo} width={w} height={h} alt="NORDSTROM RACK Logo" />;
+const Logo = () => {
+  return <img src={logo} className="w-20 sm:w-24 md:w-28 lg:w-32" alt="NORDSTROM RACK Logo" />;
 };
 
 export default Logo;
