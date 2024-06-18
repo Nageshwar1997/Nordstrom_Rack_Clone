@@ -66,9 +66,9 @@ const Header = () => {
     <header className="py-1 w-full h-22 md:h-16 shadow-md bg-white transition-all fixed top-0 left-0 right-0 z-40">
       <div>
         <div className="h-full container mx-auto flex items-center px-4 justify-between">
-          <div className="cursor-pointer pt-1">
+          <div className="cursor-pointer">
             <Link to="/">
-              <Logo w={128} h={50} />
+              <Logo />
             </Link>
           </div>
           <div className="hidden md:flex items-center lg:w-full justify-between max-w-xl rounded-full focus-within:shadow-md">
@@ -149,14 +149,14 @@ const Header = () => {
                   onClick={handleLogout}
                   className="px-2 pb-1 md:px-3 md:pb-2 lg:px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
                 >
-                  <p>Logout</p>
+                  Logout
                 </button>
               ) : (
                 <Link
                   to={"/login"}
                   className="px-4 pb-2 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
                 >
-                  <p>Login</p>
+                  Login
                 </Link>
               )}
             </div>
