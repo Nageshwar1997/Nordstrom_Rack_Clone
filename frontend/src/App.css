@@ -58,3 +58,12 @@
   border: 1px solid black;
 }
 
+/* Define your light-blue theme colors */
+.bg-light-blue {
+  background-color: #a0d8ff; /* Example light-blue color */
+}
+
+.text-light-blue {
+  color: #3182ce; /* Example light-blue text color */
+}
+

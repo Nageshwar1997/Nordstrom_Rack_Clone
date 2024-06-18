@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -14,8 +15,8 @@ const AdminPanel = () => {
   }, [user]);
 
   return (
-    <div className="min-h-[calc(100vh-120px)] md:flex hidden">
-      <aside className="bg-white min-h-full w-full max-w-60 customShadow">
+    <div className="hidden min-h-[calc(100vh-120px)] md:flex">
+      <aside className="bg-white min-h-full w-full max-w-52 shadow-md rounded">
         <div className="h-36 shadow-sm flex justify-center items-center flex-col">
           <div className="text-7xl cursor-pointer relative flex justify-center">
             {user?.profilePic ? (

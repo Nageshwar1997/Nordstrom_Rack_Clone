@@ -3,7 +3,7 @@
 import "./App.css"; // Import your custom styles
 
 // React Router Dom
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 // React
 import { useEffect, useState } from "react";
@@ -27,6 +27,7 @@ import { useDispatch } from "react-redux";
 import { setUserDetails } from "./store/userSlice";
 
 function App() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [cartProductCount, setCartProductCount] = useState(0);
 
@@ -84,7 +85,7 @@ function App() {
         <Header />
 
         {/* Main content area */}
-        <main className="min-h-[calc(100vh-120px)] pt-16">
+        <main className="min-h-[calc(100vh-120px)] pt-10">
           <Outlet /> {/* Router outlet for rendering nested routes */}
         </main>
 
