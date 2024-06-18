@@ -41,7 +41,7 @@ const Header = () => {
       toast.success(data.message);
       dispatch(setUserDetails(null));
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 1500);
     }
     if (data.error) {
@@ -63,7 +63,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full h-[105px] md:h-16 shadow-md bg-white transition-all fixed top-0 left-0 right-0 z-40">
+    <header className="py-1 w-full h-22 md:h-16 shadow-md bg-white transition-all fixed top-0 left-0 right-0 z-40">
       <div>
         <div className="h-full container mx-auto flex items-center px-4 justify-between">
           <div className="cursor-pointer pt-1">
@@ -84,7 +84,7 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-5 md:gap-7 lg:gap-9 ">
             <div className="relative flex justify-center">
               {user?._id && (
                 <div
@@ -95,7 +95,7 @@ const Header = () => {
                     <img
                       src={user?.profilePic}
                       alt={user.name}
-                      className={`w-10 h-10 rounded-full`}
+                      className={`w-8 h-8 md:w-10 md:h-10 rounded-full`}
                     />
                   ) : (
                     <FaRegUserCircle />
@@ -103,8 +103,11 @@ const Header = () => {
                 </div>
               )}
               {menuDisplay && (
-                <div className="absolute hidden md:block bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
-                  <nav className="flex flex-col">
+                <div className="absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
+                  <nav
+                    className="flex flex-col z-10"
+                    onMouseLeave={() => setMenuDisplay(false)}
+                  >
                     {user?.role === ROLE.ADMIN && (
                       <Link
                         to={"admin-panel/all-products"}
@@ -126,7 +129,10 @@ const Header = () => {
               )}
             </div>
             {user?._id && (
-              <Link to={"/cart"} className="text-3xl cursor-pointer relative">
+              <Link
+                to={"/cart"}
+                className="text-3xl cursor-pointer relative flex justify-center items-center w-5 h-5 md:w-10 md:h-10"
+              >
                 <span>
                   <FaShoppingCart />
                   {context?.cartProductCount > 0 && (
@@ -141,16 +147,16 @@ const Header = () => {
               {user?._id ? (
                 <button
                   onClick={handleLogout}
-                  className="px-4 pb-2 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+                  className="px-2 pb-1 md:px-3 md:pb-2 lg:px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
                 >
-                  Logout
+                  <p>Logout</p>
                 </button>
               ) : (
                 <Link
                   to={"/login"}
                   className="px-4 pb-2 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
                 >
-                  Login
+                  <p>Login</p>
                 </Link>
               )}
             </div>

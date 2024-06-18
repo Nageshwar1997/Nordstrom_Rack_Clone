@@ -85,7 +85,7 @@ function App() {
         <Header />
 
         {/* Main content area */}
-        <main className="min-h-[calc(100vh-120px)] pt-10">
+        <main className="min-h-[calc(100vh-120px)] pt-14 md:pt-10">
           <Outlet /> {/* Router outlet for rendering nested routes */}
         </main>
 
