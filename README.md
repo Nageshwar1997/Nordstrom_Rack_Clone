@@ -81,6 +81,9 @@ replace package.json with below text
 
 `npm install mongodb`
 
+### Run Server
+`npm run dev`
+
 ### Install bcrypt
 
 `npm i bcryptjs`
